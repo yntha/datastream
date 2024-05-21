@@ -57,3 +57,6 @@ select = [
     "FURB",  # refurb
     "RUF",  # ruff specific
 ]
+ignore = [
+    "S101", "W293"
+]
