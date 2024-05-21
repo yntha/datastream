@@ -1,0 +1,62 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "datastream"
+dynamic = ["version"]
+requires-python = ">=3.10"
+authors = ["yntha"]
+description = "A simple and easy to use library for reading and writing data streams."
+readme = "README.md"
+keywords = ["data", "stream", "io", "file", "binary"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13"
+]
+
+[project.urls]
+Homepage = "https://github.com/yntha/datastream"
+Repository = "https://github.com/yntha/datastream.git"
+Issues = "https://github.com/yntha/datastream/issues"
+
+[tool.pytest.ini_options]
+addopts = [
+    "--import-mode=importlib",
+    "-x",
+    "--durations=0",
+    "--no-header",
+    "--tb=native",
+    "--color=yes",
+    "--code-highlight=yes",
+]
+console_output_style = "count"
+testpaths = ["tests"]
+
+[tool.ruff]
+src = ["datastream", "tests"]
+
+[tool.ruff.format]
+docstring-code-format = true
+
+[tool.ruff.lint]
+select = [
+    "F",  # pyflakes
+    "E",  # pycodestyle errors
+    "W",  # pycodestyle warnings
+    "C90",  # mccabe
+    "I",  # isort
+    "UP",  # pyupgrade
+    "S",  # flake8-bandit
+    "B",  # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "PIE",  # flake8-pie
+    "SIM",  # flake8-simplify
+    "FURB",  # refurb
+    "RUF",  # ruff specific
+]
