@@ -194,28 +194,59 @@ class BaseStream:
 
     def search(self, data: bytes) -> int:
         """
-        Searches for the given data in the data stream.
+        Searches for the given data in the backing stream.
 
         Args:
             data (bytes): The data to search for.
 
         Returns:
-            int: The index of the first occurrence of the data in the data stream, or -1
-                if not found.
+            int: The index of the first occurrence of the data , or -1 if not found.
         """
         pos = self.tell()
 
         while True:
             chunk = self.read(len(data))
+
             if not chunk:
                 self.seek(pos)
+
                 return -1
             if chunk == data:
                 index = self.tell() - len(data)
                 self.seek(pos)
+
                 return index
 
             self.seek(self.tell() - len(data) + 1)
+
+    def rsearch(self, data: bytes) -> int:
+        """
+        Searches for the given data in the reverse order within the backing stream.
+
+        Args:
+            data (bytes): The data to search for.
+
+        Returns:
+            int: The index of the first occurrence of the data, or -1 if not found.
+        """
+        pos = self.tell()
+        remaining = self.remaining()
+
+        while remaining > 0:
+            self.seek(remaining, io.SEEK_CUR)
+            chunk = self.read(len(data))
+
+            if not chunk:
+                self.seek(pos)
+
+                return -1
+            if chunk == data:
+                index = self.tell() - len(data)
+                self.seek(pos)
+
+                return index
+
+            remaining -= len(data)
 
     def clear(self):
         """
