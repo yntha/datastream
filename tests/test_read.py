@@ -104,3 +104,25 @@ def test_stream_read_uint32():
     stream = DeserializingStream(iostream)
 
     assert stream.read_uint32() == 0xFFFFFFFF
+
+
+def test_stream_read_int16():
+    iostream = io.BytesIO()
+    iostream.write(bytes.fromhex("FF FF"))
+
+    iostream.seek(0)
+
+    stream = DeserializingStream(iostream)
+
+    assert stream.read_int16() == -1
+
+
+def test_stream_read_uint16():
+    iostream = io.BytesIO()
+    iostream.write(bytes.fromhex("FF FF"))
+
+    iostream.seek(0)
+
+    stream = DeserializingStream(iostream)
+
+    assert stream.read_uint16() == 0xFFFF
