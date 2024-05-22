@@ -95,3 +95,47 @@ class DeserializingStream(BaseStream):
             stop_after -= 1
 
         return decoded + (current_byte << shift_mod * 7) + int(p1)
+    
+    def read_sleb128(self) -> int:
+        """
+        Reads a signed LEB128 (Little-Endian Base 128) encoded integer from the data
+        stream. Keep in mind that this method does not perform any bounds checking, so
+        it is possible to read an arbitrarily large integer if a malformed sequence is
+        read.
+
+        Returns:
+            int: The decoded signed integer.
+        """
+        return self.read_sleb128_safe(-1)
+    
+    def read_sleb128_safe(self, stop_after = 5) -> int:
+        """
+        Reads a signed LEB128 (Little-Endian Base 128) encoded integer from the data
+        stream.
+
+        Args:
+            stop_after (int, optional): The maximum number of bytes to read before
+                stopping. Defaults to 5.
+
+        Returns:
+            int: The decoded signed integer.
+        """
+        decoded = self.read_uint8()
+        shift_mod = 1
+
+        if decoded < 0x7F:
+            return decoded
+        
+        decoded &= 0x7F
+
+        while stop_after != 0 and (current_byte := self.read_uint8()) & 0x80:
+            decoded += (current_byte & 0x7F) << shift_mod * 7
+            shift_mod += 1
+            stop_after -= 1
+        
+        decoded += (current_byte << shift_mod * 7)
+
+        if current_byte & 0x40:
+            decoded |= -(1 << (shift_mod * 7) + 7)
+
+        return decoded
