@@ -45,3 +45,9 @@ class DeserializingStream:
     
     def read_uint32(self) -> int:
         return self.read_format("I")
+    
+    def read_int16(self) -> int:
+        return self.read_format("h")
+    
+    def read_uint16(self) -> int:
+        return self.read_format("H")
