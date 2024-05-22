@@ -10,7 +10,7 @@ class DeserializingStream(BaseStream):
         self, buffer: bytes | typing.IO[bytes], byteorder: int = ByteOrder.LITTLE_ENDIAN
     ):
         if not isinstance(buffer, io.BytesIO):
-            if isinstance(buffer, io.BaseIO):
+            if isinstance(buffer, io.IOBase):
                 buffer = io.BytesIO(buffer.getvalue())
             else:
                 buffer = io.BytesIO(buffer)
