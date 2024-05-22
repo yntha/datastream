@@ -41,6 +41,9 @@ testpaths = ["tests"]
 [tool.ruff]
 src = ["datastream", "tests"]
 
+[tool.ruff.format]
+docstring-code-format = true
+
 [tool.ruff.lint]
 select = [
     "F",  # pyflakes
