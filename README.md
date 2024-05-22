@@ -1,5 +1,5 @@
 # datastream
-[![Lint and test](https://github.com/yntha/datastream/actions/workflows/python-app.yml/badge.svg)`](https://github.com/yntha/datastream/actions/workflows/python-app.yml)
+[![Lint and test](https://github.com/yntha/datastream/actions/workflows/python-app.yml/badge.svg)](https://github.com/yntha/datastream/actions/workflows/python-app.yml)
 
 Because `construct` was too complicated. This is a simple and easy to use library that provides two classes. One class serializes data, and the other one deserializes. These classes behave like streams in which they have `read`, `write`, `close` among other stream related functions. The goal of this library is to be as simple as possible while providing flexibility.
 
