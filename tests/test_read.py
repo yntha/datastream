@@ -21,3 +21,20 @@ def test_stream_read():
     assert stream.read_uint32() == 0xFFFFFFFF
     assert stream.read_int16() == -1
     assert stream.read_uint8() == 0xFF
+
+def test_stream_read_format():
+    iostream = io.BytesIO()
+
+    iostream.write(bytes.fromhex("FF FF FF FF"))
+    iostream.write(bytes.fromhex("FF FF FF FF"))
+    iostream.write(bytes.fromhex("FF FF"))
+    iostream.write(bytes.fromhex("FF"))
+
+    iostream.seek(0)
+
+    stream = DeserializingStream(iostream)
+
+    assert stream.read_format("i") == -1
+    assert stream.read_format("I") == 0xFFFFFFFF
+    assert stream.read_format("h") == -1
+    assert stream.read_format("B") == 0xFF
