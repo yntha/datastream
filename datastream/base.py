@@ -51,12 +51,12 @@ class BaseStream:
     def write(self, data: bytes):
         self._backing_stream.write(data)
 
-    def clone(self) -> "BaseStream":
+    def clone(self) -> typing.Self:
         return self.__class__(
             io.BytesIO(self._backing_stream.getvalue()), self.byteorder
         )
 
-    def substream(self, start: int, end: int) -> "BaseStream":
+    def substream(self, start: int, end: int) -> typing.Self:
         return self.__class__(
             io.BytesIO(self._backing_stream.getvalue()[start:end]), self.byteorder
         )
