@@ -30,10 +30,15 @@ class DeserializingStream:
     @property
     def byteorder(self) -> str:
         return ByteOrder(_byteorder_map.index(self._byteorder))
-    
+
     @byteorder.setter
     def byteorder(self, value: int):
         self._byteorder = _byteorder_map[value]
 
+    def read_format(self, fmt: str) -> typing.Any:
+        return struct.unpack(
+            self._byteorder + fmt, self.buffer.read(struct.calcsize(fmt))
+        )[0]
+
     def read_int32(self) -> int:
-        return struct.unpack("<i", self.buffer.read(4))[0]
+        return self.read_format("i")
