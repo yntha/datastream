@@ -12,7 +12,7 @@ def test_serializer_constructor():
     assert stream.byteorder == ByteOrder.NATIVE_ENDIAN
     assert bytes(stream) == b""
 
-    stream = SerializingStream(ByteOrder.LITTLE_ENDIAN)
+    stream = SerializingStream(byteorder=ByteOrder.LITTLE_ENDIAN)
 
     assert stream.byteorder == ByteOrder.LITTLE_ENDIAN
     assert bytes(stream) == b""
@@ -112,7 +112,7 @@ def test_serializer_write_uint8():
 
 def test_serializer_write_float():
     iostream = io.BytesIO()
-    stream = SerializingStream(iostream, ByteOrder.LITTLE_ENDIAN)
+    stream = SerializingStream(iostream, ByteOrder.BIG_ENDIAN)
 
     stream.write_float(1.0)
 
@@ -121,7 +121,7 @@ def test_serializer_write_float():
 
 def test_serializer_write_double():
     iostream = io.BytesIO()
-    stream = SerializingStream(iostream, ByteOrder.LITTLE_ENDIAN)
+    stream = SerializingStream(iostream, ByteOrder.BIG_ENDIAN)
 
     stream.write_double(1.0)
 
@@ -136,6 +136,7 @@ def test_serializer_write_bool():
 
     assert bytes(stream) == bytes.fromhex("01")
 
+    stream.clear()
     stream.write_bool(False)
 
     assert bytes(stream) == bytes.fromhex("00")
