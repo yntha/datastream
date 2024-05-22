@@ -34,10 +34,13 @@ class DeserializingStream:
     @byteorder.setter
     def byteorder(self, value: int):
         self._byteorder = _byteorder_map[value]
+    
+    def read(self, size: int) -> bytes:
+        return self.buffer.read(size)
 
     def read_format(self, fmt: str) -> typing.Any:
         return struct.unpack(
-            self._byteorder + fmt, self.buffer.read(struct.calcsize(fmt))
+            self._byteorder + fmt, self.read(struct.calcsize(fmt))
         )[0]
     
     def read_int64(self) -> int:
