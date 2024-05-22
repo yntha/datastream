@@ -1,5 +1,7 @@
 import io
+import struct
 
+import pytest
 from datastream import DeserializingStream
 
 
@@ -22,6 +24,7 @@ def test_stream_read():
     assert stream.read_int16() == -1
     assert stream.read_uint8() == 0xFF
 
+
 def test_stream_read_format():
     iostream = io.BytesIO()
 
@@ -38,3 +41,22 @@ def test_stream_read_format():
     assert stream.read_format("I") == 0xFFFFFFFF
     assert stream.read_format("h") == -1
     assert stream.read_format("B") == 0xFF
+
+
+def test_stream_read_invalid_format():
+    iostream = io.BytesIO()
+
+    iostream.write(bytes.fromhex("FF FF FF FF"))
+    iostream.write(bytes.fromhex("FF FF FF FF"))
+    iostream.write(bytes.fromhex("FF FF"))
+    iostream.write(bytes.fromhex("FF"))
+
+    iostream.seek(0)
+
+    stream = DeserializingStream(iostream)
+
+    with pytest.raises(struct.error):
+        stream.read_format("z")
+
+    with pytest.raises(struct.error):
+        stream.read_format("qq")
