@@ -75,14 +75,14 @@ class SerializingStream(BaseStream):
         """
         self.write_uleb128_safe(value, -1)
 
-    def write_uleb128_safe(self, value: int, max_bytes: int = 5):
+    def write_uleb128_safe(self, value: int, max_bytes: int = 16):
         """
         Writes a ULEB128(Unsigned Little-Endian Base 128) number to the data stream.
 
         Args:
             value (int): The unsigned integer value to be written.
             max_bytes (int, optional): The maximum number of bytes to use for encoding
-                the value. Defaults to 5.
+                the value. Defaults to 16.
         """
         while max_bytes != 0:
             byte = value & 0x7F

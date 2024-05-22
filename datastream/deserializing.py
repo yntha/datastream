@@ -65,14 +65,14 @@ class DeserializingStream(BaseStream):
         """
         return self.read_uleb128_safe(-1)
 
-    def read_uleb128_safe(self, max_bytes = 5) -> int:
+    def read_uleb128_safe(self, max_bytes = 16) -> int:
         """
         Reads an unsigned LEB128 (Little-Endian Base 128) encoded integer from the data
         stream.
 
         Args:
             max_bytes (int, optional): The maximum number of bytes to read before
-                stopping. Defaults to 5.
+                stopping. Defaults to 16.
 
         Returns:
             int: The decoded unsigned integer.
