@@ -15,6 +15,18 @@ class SerializingStream(BaseStream):
             buffer = io.BytesIO()
 
         super().__init__(buffer, byteorder)
+    
+    def bytes(self) -> bytes:
+        """
+        Returns the bytes written to the stream.
+
+        Returns:
+            bytes: The bytes written to the stream.
+        """
+        return self._backing_stream.getvalue()
+    
+    def __bytes__(self) -> bytes:
+        return self.bytes()
 
     def write_format(self, fmt: str, value: typing.Any):
         self.write(struct.pack(self._byteorder + fmt, value))
