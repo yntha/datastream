@@ -35,7 +35,7 @@ addopts = [
 ]
 console_output_style = "count"
 testpaths = ["tests"]
-pythonpath = ["datastream"]
+pythonpath = ["."]
 
 [tool.ruff]
 src = ["datastream", "tests"]
