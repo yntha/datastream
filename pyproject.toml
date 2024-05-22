@@ -30,7 +30,7 @@ addopts = [
     "-x",
     "--durations=0",
     "--no-header",
-    "--tb=native",
+    "--tb=short",
 ]
 console_output_style = "count"
 testpaths = ["tests"]
