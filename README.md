@@ -5,7 +5,14 @@
 [![Lint and test](https://github.com/yntha/datastream/actions/workflows/python-app.yml/badge.svg)](https://github.com/yntha/datastream/actions/workflows/python-app.yml)
 
 
-Because `construct` was too complicated. This is a simple and easy to use library that provides two classes. One class serializes data, and the other one deserializes. These classes behave like streams in which they have `read`, `write`, `close` among other stream related functions. The goal of this library is to be as simple as possible while providing flexibility.
+Because `construct` was too complicated.
+
+This is a simple and easy to use library that provides two classes. One class serializes data, and the other one deserializes. These classes behave like streams in which they have `read`, `write`, `close` among other stream related functions. The goal of this library is to be as simple as possible while providing flexibility.
+
+To install the library, use the following:
+```console
+python -m pip install --user -U pydatastreams
+```
 
 To import the library, use the following:
 ```python
