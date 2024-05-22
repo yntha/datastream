@@ -145,6 +145,6 @@ def test_serializer_write_bytes():
     iostream = io.BytesIO()
     stream = SerializingStream(iostream)
 
-    stream.write_bytes(b"\x00\x01\x02\x03")
+    stream.write(b"\x00\x01\x02\x03")
 
     assert bytes(stream) == bytes.fromhex("00 01 02 03")
