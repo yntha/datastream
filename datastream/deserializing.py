@@ -39,6 +39,12 @@ class DeserializingStream:
         return struct.unpack(
             self._byteorder + fmt, self.buffer.read(struct.calcsize(fmt))
         )[0]
+    
+    def read_int64(self) -> int:
+        return self.read_format("q")
+    
+    def read_uint64(self) -> int:
+        return self.read_format("Q")
 
     def read_int32(self) -> int:
         return self.read_format("i")
