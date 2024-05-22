@@ -63,3 +63,9 @@ class DeserializingStream:
     
     def read_uint8(self) -> int:
         return self.read_format("B")
+    
+    def read_float(self) -> float:
+        return self.read_format("f")
+    
+    def read_double(self) -> float:
+        return self.read_format("d")
