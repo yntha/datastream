@@ -60,3 +60,25 @@ def test_stream_read_invalid_format():
 
     with pytest.raises(struct.error):
         stream.read_format("qq")
+
+
+def test_stream_read_int64():
+    iostream = io.BytesIO()
+    iostream.write(bytes.fromhex("FF FF FF FF FF FF FF FF"))
+
+    iostream.seek(0)
+
+    stream = DeserializingStream(iostream)
+
+    assert stream.read_int64() == -1
+
+
+def test_stream_read_uint64():
+    iostream = io.BytesIO()
+    iostream.write(bytes.fromhex("FF FF FF FF FF FF FF FF"))
+
+    iostream.seek(0)
+
+    stream = DeserializingStream(iostream)
+
+    assert stream.read_uint64() == 0xFFFFFFFFFFFFFFFF
