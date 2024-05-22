@@ -32,11 +32,10 @@ addopts = [
     "--durations=0",
     "--no-header",
     "--tb=native",
-    "--color=yes",
-    "--code-highlight=yes",
 ]
 console_output_style = "count"
 testpaths = ["tests"]
+pythonpath = ["datastream"]
 
 [tool.ruff]
 src = ["datastream", "tests"]
