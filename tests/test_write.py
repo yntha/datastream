@@ -138,7 +138,7 @@ def test_serializer_write_bool():
 
     stream.write_bool(False)
 
-    assert bytes(stream) == bytes.fromhex("01 00")
+    assert bytes(stream) == bytes.fromhex("00")
 
 
 def test_serializer_write_bytes():
