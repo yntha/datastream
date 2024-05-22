@@ -53,28 +53,24 @@ class DeserializingStream(BaseStream):
     def read_bool(self) -> bool:
         return bool(self.read_uint8())
     
-    def read_uleb128(self, p1: bool = False) -> int:
+    def read_uleb128(self) -> int:
         """
         Reads an unsigned LEB128 (Little-Endian Base 128) encoded integer from the data
         stream. Keep in mind that this method does not perform any bounds checking, so
         it is possible to read an arbitrarily large integer if a malformed sequence is
         read.
-
-        Args:
-            p1 (bool, optional): Whether this is ULEB128p1. Defaults to False.
         
         Returns:
             int: The decoded unsigned integer.
         """
-        return self.read_uleb128_safe(p1, -1)
+        return self.read_uleb128_safe(-1)
 
-    def read_uleb128_safe(self, p1: bool = False, stop_after = 5) -> int:
+    def read_uleb128_safe(self, stop_after = 5) -> int:
         """
         Reads an unsigned LEB128 (Little-Endian Base 128) encoded integer from the data
         stream.
 
         Args:
-            p1 (bool, optional): Whether this is ULEB128p1. Defaults to False.
             stop_after (int, optional): The maximum number of bytes to read before
                 stopping. Defaults to 5.
 
@@ -84,7 +80,7 @@ class DeserializingStream(BaseStream):
         decoded = self.read_uint8()
 
         if decoded < 0x7F:
-            return decoded + int(p1)
+            return decoded
 
         decoded &= 0x7F
         shift_mod = 1
@@ -94,7 +90,7 @@ class DeserializingStream(BaseStream):
             shift_mod += 1
             stop_after -= 1
 
-        return decoded + (current_byte << shift_mod * 7) + int(p1)
+        return decoded + (current_byte << shift_mod * 7)
     
     def read_sleb128(self) -> int:
         """
