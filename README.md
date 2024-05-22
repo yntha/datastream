@@ -8,6 +8,17 @@ To import the library, use the following:
 from datastream import SerializingStream, DeserializingStream, ByteOrder
 ```
 
+Retrieving serialized data from a SerializingStream:
+```python
+stream = SerializingStream()
+stream.write_int32(42)
+
+serialized = stream.bytes()
+
+# this also works
+serialized = bytes(stream)
+```
+
 The stream classes support serializing/deserializing the standard data types:
 | Data Type | Description | [Serializer](datastream/serializing.py#L8) | [Deserializer](datastream/deserializing.py#L8)
 | --- | --- | ---| --- |
