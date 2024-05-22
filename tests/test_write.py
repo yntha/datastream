@@ -112,7 +112,7 @@ def test_serializer_write_uint8():
 
 def test_serializer_write_float():
     iostream = io.BytesIO()
-    stream = SerializingStream(iostream)
+    stream = SerializingStream(iostream, ByteOrder.LITTLE_ENDIAN)
 
     stream.write_float(1.0)
 
@@ -121,7 +121,7 @@ def test_serializer_write_float():
 
 def test_serializer_write_double():
     iostream = io.BytesIO()
-    stream = SerializingStream(iostream)
+    stream = SerializingStream(iostream, ByteOrder.LITTLE_ENDIAN)
 
     stream.write_double(1.0)
 
