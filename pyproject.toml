@@ -60,5 +60,5 @@ select = [
     "RUF",  # ruff specific
 ]
 ignore = [
-    "S101", "W293"
+    "S101", "W293", "RUF200"
 ]
