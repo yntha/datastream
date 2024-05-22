@@ -5,6 +5,15 @@ from enum import IntEnum
 
 # these constants refer to the index of the byteorder character in _byteorder_map
 class ByteOrder(IntEnum):
+    """
+    Enumeration representing byte order options.
+
+    Attributes:
+        LITTLE_ENDIAN (int): Represents little-endian byte order.
+        BIG_ENDIAN (int): Represents big-endian byte order.
+        NETWORK_ENDIAN (int): Represents network byte order.
+        NATIVE_ENDIAN (int): Represents native byte order.
+    """
     LITTLE_ENDIAN = 0
     BIG_ENDIAN = 1
     NETWORK_ENDIAN = 2
