@@ -7,7 +7,7 @@ from datastream.base import BaseStream, ByteOrder
 
 class DeserializingStream(BaseStream):
     def __init__(
-        self, buffer: bytes | typing.IO[bytes], byteorder: int = ByteOrder.LITTLE_ENDIAN
+        self, buffer: bytes | typing.IO[bytes], byteorder: int = ByteOrder.NATIVE_ENDIAN
     ):
         if not isinstance(buffer, io.BytesIO):
             if isinstance(buffer, io.IOBase):
