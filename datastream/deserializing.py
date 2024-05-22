@@ -49,3 +49,6 @@ class DeserializingStream(BaseStream):
 
     def read_double(self) -> float:
         return self.read_format("d")
+    
+    def read_bool(self) -> bool:
+        return bool(self.read_uint8())
