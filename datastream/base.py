@@ -139,7 +139,8 @@ class BaseStream:
 
     def substream(self, start: int, end: int) -> typing.Self:
         """
-        Returns a new instance of the same class, representing a substream of the current stream.
+        Returns a new instance of the same class, representing a substream of the
+        current stream.
 
         Args:
             start (int): The starting index of the substream.
@@ -173,8 +174,8 @@ class BaseStream:
 
     def seekpeek(self, offset: int, size: int) -> bytes:
         """
-        Seeks to the specified offset in the data stream, reads the specified number of bytes,
-        and then restores the original position.
+        Seeks to the specified offset in the data stream, reads the specified number of
+        bytes, and then restores the original position.
 
         Args:
             offset (int): The offset from the current position to seek to.
@@ -250,7 +251,8 @@ class BaseStream:
 
     def clear(self):
         """
-        Clears the backing stream by truncating it to 0 bytes and resetting the stream position to the beginning.
+        Clears the backing stream by truncating it to 0 bytes and resetting the stream
+        position to the beginning.
         """
         self._backing_stream.truncate(0)
         self._backing_stream.seek(0)
