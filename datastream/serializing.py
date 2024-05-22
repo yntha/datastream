@@ -83,3 +83,43 @@ class SerializingStream(BaseStream):
 
             self.write_uint8(byte | 0x80)
             max_bytes -= 1
+
+    def write_sleb128(self, value: int):
+        """
+        Writes a SLEB128(Signed Little-Endian Base 128) number to the data stream.
+        This function does no bounds checking. It will encode the complete integer
+        in `value` and write it to the stream.
+
+        Parameters:
+            value (int): The signed integer value to be written.
+        """
+        return self.write_sleb128_safe(value, -1)
+
+    def write_sleb128_safe(self, value: int, max_bytes: int = 5):
+        """
+        Writes a SLEB128(Signed Little-Endian Base 128) number to the data stream.
+
+        Args:
+            value (int): The signed integer value to be written.
+            max_bytes (int, optional): The maximum number of bytes to use for encoding
+                the value. Defaults to 5.
+        """
+        if value >= 0:
+            while max_bytes != 0 and value > 0x3F:
+                self.write_uint8((value & 0x7F) | 0x80)
+
+                # lsr >>> in java
+                value %= 0x100000000
+                value >>= 7
+
+                max_bytes -= 1
+
+            self.write_uint8(value & 0x7F)
+        else:
+            while max_bytes != 0 and value < -0x40:
+                self.write_uint8((value & 0x7F) | 0x80)
+
+                value >>= 7
+                max_bytes -= 1
+
+            self.write_uint8(value & 0x7F)
