@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "datastream"
+name = "pydatastreams"
 dynamic = ["version"]
 requires-python = ">=3.11"
 authors = [{ name = "yntha", email = "bguznvjk@gmail.com" }]
@@ -26,6 +26,12 @@ Issues = "https://github.com/yntha/datastream/issues"
 
 [tool.hatch.version]
 path = "datastream/__about__.py"
+
+[tool.hatch.build.targets.sdist]
+packages = ["datastream"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["datastream"]
 
 [tool.pytest.ini_options]
 addopts = [
