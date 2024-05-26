@@ -16,7 +16,7 @@ python -m pip install --user -U pydatastreams
 
 To import the library, use the following:
 ```python
-from datastream import SerializingStream, DeserializingStream, ByteOrder
+from datastream import SerializingStream, DeserializingStream, TwoWayStream, ByteOrder
 ```
 
 Retrieving serialized data from a SerializingStream:
