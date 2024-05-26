@@ -2,7 +2,7 @@ import io
 import struct
 
 import pytest
-from datastream import ByteOrder, SerializingStream
+from datastream import ByteOrder, SerializingStream, TwoWayStream
 
 
 def test_serializer_constructor():
@@ -16,6 +16,14 @@ def test_serializer_constructor():
 
     assert stream.byteorder == ByteOrder.LITTLE_ENDIAN
     assert bytes(stream) == b""
+
+
+def test_twoway_stream_write():
+    stream = TwoWayStream()
+
+    stream.write_uint32(0xFFFFFFFF)
+
+    assert bytes(stream) == bytes.fromhex("FF FF FF FF")
 
 
 def test_serializer_write_format():

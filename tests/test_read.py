@@ -2,7 +2,7 @@ import io
 import struct
 
 import pytest
-from datastream import DeserializingStream
+from datastream import DeserializingStream, TwoWayStream
 
 
 def test_stream_read():
@@ -15,6 +15,18 @@ def test_stream_read():
     # ensure that the DeserializingStream class accepts buffers and streams alike
     stream = DeserializingStream(iostream)
     stream = DeserializingStream(iostream.getvalue())  # noqa: F841
+
+
+def test_twoway_stream_read():
+    iostream = io.BytesIO()
+
+    iostream.write(bytes.fromhex("FF FF FF FF"))
+
+    iostream.seek(0)
+
+    stream = TwoWayStream(iostream)
+
+    assert stream.read_uint32() == 0xFFFFFFFF
 
 
 def test_stream_read_format():
