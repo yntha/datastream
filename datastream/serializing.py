@@ -25,7 +25,7 @@ class SerializingStream(BaseStream):
         """
         return self._backing_stream.getvalue()
 
-    def __bytes__(self) -> bytes:
+    def __bytes__(self) -> bytes: # type: ignore
         return self.bytes()
 
     def write_format(self, fmt: str, value: typing.Any):
