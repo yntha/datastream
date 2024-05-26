@@ -11,9 +11,9 @@ class DeserializingStream(BaseStream):
     ):
         if not isinstance(buffer, io.BytesIO):
             if isinstance(buffer, io.IOBase):
-                buffer = io.BytesIO(buffer.getvalue())
+                buffer = io.BytesIO(buffer.getvalue()) # type: ignore
             else:
-                buffer = io.BytesIO(buffer)
+                buffer = io.BytesIO(buffer) # type: ignore
 
         super().__init__(buffer, byteorder)
 
@@ -129,9 +129,9 @@ class DeserializingStream(BaseStream):
             shift_mod += 1
             stop_after -= 1
         
-        decoded += (current_byte << shift_mod * 7)
+        decoded += (current_byte << shift_mod * 7) # type: ignore
 
-        if current_byte & 0x40:
+        if current_byte & 0x40: # type: ignore
             decoded |= -(1 << (shift_mod * 7) + 7)
 
         return decoded
