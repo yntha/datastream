@@ -30,6 +30,8 @@ serialized = stream.bytes()
 serialized = bytes(stream)
 ```
 
+Note: This library also contains a stream for both serializing and deserializing data. This stream is called [`TwoWayStream`](datastream/twoway.py#L9).
+
 The stream classes support serializing/deserializing the standard data types:
 | Data Type | Description | [Serializer](datastream/serializing.py#L8) | [Deserializer](datastream/deserializing.py#L8)
 | --- | --- | ---| --- |
