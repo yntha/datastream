@@ -58,6 +58,7 @@ Additionally, the stream classes also provide the following non-standard data ty
 Finally, the stream classes also provide the following utility functions:
 | Function | Description |
 | --- | --- |
+| [`set(buffer:  bytes \| typing.IO[bytes])`](datastream/deserializing.py#L25) | Sets the backing stream to the given buffer. DeserializingStream only. |
 | [`read(size: int) -> bytes`](datastream/base.py#L64) | Reads up to `size` bytes from the backing stream. |
 | [`write(data: bytes)`](datastream/base.py#L120) | Writes the given data to the backing stream. |
 | [`size() -> int`](datastream/base.py#L76) | Returns the size of the backing stream. |
