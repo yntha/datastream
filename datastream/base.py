@@ -44,12 +44,12 @@ class BaseStream:
         self._byteorder = _byteorder_map[byteorder]
 
     @property
-    def byteorder(self) -> str:
+    def byteorder(self) -> ByteOrder:
         """
         Returns the byte order of the datastream.
 
         Returns:
-            str: The byte order of the datastream.
+            ByteOrder: The byte order of the datastream.
         """
         return ByteOrder(_byteorder_map.index(self._byteorder))
 
@@ -257,6 +257,8 @@ class BaseStream:
                 return index
 
             remaining -= len(data)
+        
+        return -1
 
     def clear(self):
         """
