@@ -9,6 +9,11 @@ class DeserializingStream(BaseStream):
     def __init__(
         self, buffer: bytes | typing.IO[bytes], byteorder: int = ByteOrder.NATIVE_ENDIAN
     ):
+        if buffer is None:
+            super().__init__(buffer, byteorder)
+            
+            return
+        
         if not isinstance(buffer, io.BytesIO):
             if isinstance(buffer, io.IOBase):
                 buffer = io.BytesIO(buffer.getvalue()) # type: ignore
@@ -16,6 +21,15 @@ class DeserializingStream(BaseStream):
                 buffer = io.BytesIO(buffer) # type: ignore
 
         super().__init__(buffer, byteorder)
+    
+    def set(self, buffer: bytes | typing.IO[bytes]):
+        if not isinstance(buffer, io.BytesIO):
+            if isinstance(buffer, io.IOBase):
+                self._backing_stream = io.BytesIO(buffer.getvalue()) # type: ignore
+            else:
+                self._backing_stream = io.BytesIO(buffer) # type: ignore
+        else:
+            self._backing_stream = buffer
 
     def read_format(self, fmt: str) -> typing.Any:
         return struct.unpack(self._byteorder + fmt, self.read(struct.calcsize(fmt)))[0]

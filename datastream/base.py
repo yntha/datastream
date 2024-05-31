@@ -34,6 +34,9 @@ class BaseStream:
     """
 
     def __init__(self, backing_stream: typing.IO[bytes], byteorder: int):
+        if backing_stream is None:
+            return
+        
         if not isinstance(backing_stream, io.BytesIO):
             raise ValueError("backing_stream must be a BytesIO object")
 
@@ -71,6 +74,9 @@ class BaseStream:
         Returns:
             bytes: The bytes read from the backing stream.
         """
+        if self._backing_stream is None:
+            raise ValueError("backing_stream has not been set.")
+
         return self._backing_stream.read(size)
 
     def size(self) -> int:
@@ -124,6 +130,9 @@ class BaseStream:
         Args:
             data (bytes): The data to be written.
         """
+        if self._backing_stream is None:
+            raise ValueError("backing_stream has not been set.")
+
         self._backing_stream.write(data)
 
     def clone(self) -> typing.Self:
