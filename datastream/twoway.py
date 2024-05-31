@@ -18,9 +18,9 @@ class TwoWayStream(BaseStream):
             buffer = io.BytesIO(buffer)
 
         self.dstream = DeserializingStream(buffer, byteorder)
-        self.sstream = SerializingStream(buffer, byteorder)
+        self.sstream = SerializingStream(buffer, byteorder) # type: ignore
 
-        super().__init__(buffer, byteorder)
+        super().__init__(buffer, byteorder) # type: ignore
 
     def read_format(self, fmt: str) -> typing.Any:
         return self.dstream.read_format(fmt)
