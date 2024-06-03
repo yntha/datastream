@@ -15,10 +15,10 @@ class ByteOrder(IntEnum):
         NATIVE_ENDIAN (int): Represents native byte order.
     """
 
-    LITTLE_ENDIAN = 0
-    BIG_ENDIAN = 1
-    NETWORK_ENDIAN = 2
-    NATIVE_ENDIAN = 3
+    NETWORK_ENDIAN = 0
+    NATIVE_ENDIAN = 1
+    LITTLE_ENDIAN = 2
+    BIG_ENDIAN = 3
 
 
 _byteorder_map = "!@<>"
@@ -36,7 +36,7 @@ class BaseStream:
     def __init__(self, backing_stream: typing.IO[bytes], byteorder: int):
         if backing_stream is None:
             return
-        
+
         if not isinstance(backing_stream, io.BytesIO):
             raise ValueError("backing_stream must be a BytesIO object")
 
@@ -257,7 +257,7 @@ class BaseStream:
                 return index
 
             remaining -= len(data)
-        
+
         return -1
 
     def clear(self):
