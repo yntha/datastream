@@ -48,7 +48,7 @@ def test_serializer_write_format_invalid():
 
 def test_serializer_write_int64():
     iostream = io.BytesIO()
-    stream = SerializingStream(iostream)
+    stream = SerializingStream(iostream, byteorder=ByteOrder.BIG_ENDIAN)
 
     stream.write_int64(-1)
 
@@ -57,7 +57,7 @@ def test_serializer_write_int64():
 
 def test_serializer_write_uint64():
     iostream = io.BytesIO()
-    stream = SerializingStream(iostream)
+    stream = SerializingStream(iostream, byteorder=ByteOrder.BIG_ENDIAN)
 
     stream.write_uint64(0xFFFFFFFFFFFFFFFF)
 
@@ -66,7 +66,7 @@ def test_serializer_write_uint64():
 
 def test_serializer_write_int32():
     iostream = io.BytesIO()
-    stream = SerializingStream(iostream)
+    stream = SerializingStream(iostream, byteorder=ByteOrder.BIG_ENDIAN)
 
     stream.write_int32(-1)
 
@@ -75,7 +75,7 @@ def test_serializer_write_int32():
 
 def test_serializer_write_uint32():
     iostream = io.BytesIO()
-    stream = SerializingStream(iostream)
+    stream = SerializingStream(iostream, byteorder=ByteOrder.BIG_ENDIAN)
 
     stream.write_uint32(0xFFFFFFFF)
 
@@ -84,7 +84,7 @@ def test_serializer_write_uint32():
 
 def test_serializer_write_int16():
     iostream = io.BytesIO()
-    stream = SerializingStream(iostream)
+    stream = SerializingStream(iostream, byteorder=ByteOrder.BIG_ENDIAN)
 
     stream.write_int16(-1)
 
@@ -93,7 +93,7 @@ def test_serializer_write_int16():
 
 def test_serializer_write_uint16():
     iostream = io.BytesIO()
-    stream = SerializingStream(iostream)
+    stream = SerializingStream(iostream, byteorder=ByteOrder.BIG_ENDIAN)
 
     stream.write_uint16(0xFFFF)
 
