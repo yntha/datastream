@@ -32,28 +32,28 @@ class SerializingStream(BaseStream):
         self.write(struct.pack(self._byteorder + fmt, value))
 
     def write_int64(self, value: int):
-        self.write_format("q", value)
+        self.write_format("q", value & 0xFFFFFFFFFFFFFFFF)
 
     def write_uint64(self, value: int):
-        self.write_format("Q", value)
+        self.write_format("Q", value & 0xFFFFFFFFFFFFFFFF)
 
     def write_int32(self, value: int):
-        self.write_format("i", value)
+        self.write_format("i", value & 0xFFFFFFFF)
 
     def write_uint32(self, value: int):
-        self.write_format("I", value)
+        self.write_format("I", value & 0xFFFFFFFF)
 
     def write_int16(self, value: int):
-        self.write_format("h", value)
+        self.write_format("h", value & 0xFFFF)
 
     def write_uint16(self, value: int):
-        self.write_format("H", value)
+        self.write_format("H", value & 0xFFFF)
 
     def write_int8(self, value: int):
-        self.write_format("b", value)
+        self.write_format("b", value & 0xFF)
 
     def write_uint8(self, value: int):
-        self.write_format("B", value)
+        self.write_format("B", value & 0xFF)
 
     def write_float(self, value: float):
         self.write_format("f", value)
