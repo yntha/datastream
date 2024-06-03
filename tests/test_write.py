@@ -52,7 +52,7 @@ def test_serializer_write_int64():
 
     stream.write_int64(-1)
 
-    assert bytes(stream) == bytes.fromhex("7F FF FF FF FF FF FF FF")
+    assert bytes(stream) == bytes.fromhex("FF FF FF FF FF FF FF FF")
 
 
 def test_serializer_write_uint64():
@@ -70,7 +70,7 @@ def test_serializer_write_int32():
 
     stream.write_int32(-1)
 
-    assert bytes(stream) == bytes.fromhex("7F FF FF FF")
+    assert bytes(stream) == bytes.fromhex("FF FF FF FF")
 
 
 def test_serializer_write_uint32():
@@ -88,7 +88,7 @@ def test_serializer_write_int16():
 
     stream.write_int16(-1)
 
-    assert bytes(stream) == bytes.fromhex("7F FF")
+    assert bytes(stream) == bytes.fromhex("FF FF")
 
 
 def test_serializer_write_uint16():
@@ -106,7 +106,7 @@ def test_serializer_write_int8():
 
     stream.write_int8(-1)
 
-    assert bytes(stream) == bytes.fromhex("7F")
+    assert bytes(stream) == bytes.fromhex("FF")
 
 
 def test_serializer_write_uint8():
