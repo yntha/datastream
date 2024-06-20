@@ -43,6 +43,15 @@ class BaseStream:
         self._backing_stream = backing_stream
         self._byteorder = _byteorder_map[byteorder]
 
+    def __enter__(self) -> typing.Self:
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        if exc_type is not None:
+            raise exc_type(exc_value).with_traceback(traceback)
+
+        self.close()
+
     @property
     def byteorder(self) -> ByteOrder:
         """
