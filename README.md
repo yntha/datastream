@@ -21,13 +21,13 @@ from datastream import SerializingStream, DeserializingStream, TwoWayStream, Byt
 
 Retrieving serialized data from a SerializingStream:
 ```python
-stream = SerializingStream()
-stream.write_int32(42)
+with SerializingStream() as stream:
+    stream.write_int32(42)
 
-serialized = stream.bytes()
+    serialized = stream.bytes()
 
-# this also works
-serialized = bytes(stream)
+    # this also works
+    serialized = bytes(stream)
 ```
 
 Note: This library also contains a stream for both serializing and deserializing data. This stream is called [`TwoWayStream`](datastream/twoway.py#L9).
