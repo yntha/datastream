@@ -40,6 +40,8 @@ class DeserializingStream(BaseStream):
         while (byte := self.read(len(terminator))) != terminator:
             data += byte
 
+        data += terminator
+
         return data
 
     def read_int64(self) -> int:

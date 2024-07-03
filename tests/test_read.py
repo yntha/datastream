@@ -66,6 +66,17 @@ def test_stream_read_invalid_format():
         stream.read_format("qq")
 
 
+def test_stream_read_until():
+    iostream = io.BytesIO()
+
+    iostream.write(bytes.fromhex("DEADBEEF00"))
+    iostream.seek(0)
+
+    stream = DeserializingStream(iostream)
+
+    assert stream.read_until(b"\x00") == b"\xDE\xAD\xBE\xEF\x00"
+
+
 def test_stream_read_int64():
     iostream = io.BytesIO()
     iostream.write(bytes.fromhex("FF FF FF FF FF FF FF FF"))
